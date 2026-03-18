@@ -18,6 +18,84 @@ func LoadConfig() {
 	logrus.Infof("success load env file✅")
 }
 
+func AppPort() string {
+	return os.Getenv("PORT")
+}
+
+func DbHost() string {
+	return os.Getenv("DB_HOST")
+}
+
+func DbPort() string {
+	return os.Getenv("DB_PORT")
+}
+
+func DbUser() string {
+	return os.Getenv("DB_USER")
+}
+
+func DbPassword() string {
+	return os.Getenv("DB_PASSWORD")
+}
+
+func DbName() string {
+	return os.Getenv("DB_NAME")
+}
+
+func DbTimezone() string {
+	return os.Getenv("DB_TIMEZONE")
+}
+
+func DbConnectionTimeout() time.Duration {
+	if val := os.Getenv("DB_CONNECTION_TIMEOUT"); val != "" {
+		if duration, err := time.ParseDuration(val); err == nil {
+			return duration
+		}
+	}
+
+	return 10 * time.Second
+}
+
+func DbMaxOpenConns() int {
+	if val := os.Getenv("DB_MAX_OPEN_CONNS"); val != "" {
+		if num, err := strconv.Atoi(val); err == nil {
+			return num
+		}
+	}
+
+	return 30
+}
+
+func DbMaxIdleConns() int {
+	if val := os.Getenv("DB_MAX_IDLE_CONNS"); val != "" {
+		if num, err := strconv.Atoi(val); err == nil {
+			return num
+		}
+	}
+
+	return 30
+}
+
+func DbConnMaxLifetime() time.Duration {
+	if val := os.Getenv("DB_CONN_MAX_LIFETIME"); val != "" {
+		if duration, err := time.ParseDuration(val); err == nil {
+			return duration
+		}
+	}
+
+	return DefaultDbConnMaxLifetime
+}
+
+func DbConnMaxIdletime() time.Duration {
+	if val := os.Getenv("DB_CONN_MAX_IDLETIME"); val != "" {
+		if duration, err := time.ParseDuration(val); err == nil {
+			return duration
+		}
+	}
+
+	return DbDefaultDbConnMaxIdletime
+}
+
 func EnableCaching() bool {
 	val := os.Getenv("ENABLE_CACHING")
 	if val == "" {
@@ -106,4 +184,44 @@ func OtlpEndpoint() string {
 
 func OtlpPort() string {
 	return os.Getenv("OTLP_PORT")
+}
+
+func HttpServerReadHeaderTimeout() time.Duration {
+	if val := os.Getenv("HTTP_SERVER_READ_HEADER_TIMEOUT"); val != "" {
+		if duration, err := time.ParseDuration(val); err == nil {
+			return duration
+		}
+	}
+
+	return DefaultHttpServerReadHeaderTimeout
+}
+
+func HttpServerReadTimeout() time.Duration {
+	if val := os.Getenv("HTTP_SERVER_READ_TIMEOUT"); val != "" {
+		if duration, err := time.ParseDuration(val); err == nil {
+			return duration
+		}
+	}
+
+	return DefaultHttpServerReadTimeout
+}
+
+func HttpServerWriteTimeout() time.Duration {
+	if val := os.Getenv("HTTP_SERVER_WRITE_TIMEOUT"); val != "" {
+		if duration, err := time.ParseDuration(val); err == nil {
+			return duration
+		}
+	}
+
+	return DefaultHttpServerWriteTimeout
+}
+
+func HttpServerIdleTimeout() time.Duration {
+	if val := os.Getenv("HTTP_SERVER_IDLE_TIMEOUT"); val != "" {
+		if duration, err := time.ParseDuration(val); err == nil {
+			return duration
+		}
+	}
+
+	return DefaultHttpServerIdleTimeout
 }
