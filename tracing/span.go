@@ -29,3 +29,14 @@ func Start(ctx context.Context) (context.Context, trace.Span) {
 
 	return otel.Tracer(config.OtlpServiceName()).Start(ctx, spanName)
 }
+
+// StartWithName starts a span with custom name
+func StartWithName(ctx context.Context, name string) (context.Context, trace.Span) {
+	if gCtx, ok := ctx.(*gin.Context); ok {
+		newCtx, span := otel.Tracer(config.OtlpServiceName()).Start(gCtx.Request.Context(), name)
+		gCtx.Request = gCtx.Request.WithContext(newCtx)
+		return newCtx, span
+	}
+
+	return otel.Tracer(config.OtlpServiceName()).Start(ctx, name)
+}
