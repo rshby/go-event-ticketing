@@ -17,3 +17,10 @@ type Event struct {
 func (e *Event) TableName() string {
 	return "events"
 }
+
+func (e *Event) IsIDExists() bool {
+	return e.ID > 0
+}
+
+type EventRepository interface {
+}
