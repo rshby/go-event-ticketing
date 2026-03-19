@@ -22,6 +22,10 @@ func AppPort() string {
 	return os.Getenv("PORT")
 }
 
+func Mode() string {
+	return os.Getenv("MODE")
+}
+
 func DbHost() string {
 	return os.Getenv("DB_HOST")
 }

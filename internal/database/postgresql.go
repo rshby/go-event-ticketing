@@ -8,6 +8,7 @@ import (
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
+	"gorm.io/plugin/opentelemetry/tracing"
 )
 
 // ConnectPostgreSql connect to SQL
@@ -22,6 +23,11 @@ func ConnectPostgreSql() (*gorm.DB, error) {
 	})
 	if err != nil {
 		logrus.Error(err)
+		return nil, err
+	}
+
+	if err := db.Use(tracing.NewPlugin(tracing.WithoutMetrics())); err != nil {
+		logrus.Errorf("failed to setup opentelemetry tracing on gorm: %v", err)
 		return nil, err
 	}
 

@@ -11,8 +11,10 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
+	"github.com/rshby/go-event-ticketing/cacher"
 	"github.com/rshby/go-event-ticketing/config"
 	"github.com/rshby/go-event-ticketing/internal/database"
+	"github.com/rshby/go-event-ticketing/internal/router"
 	"github.com/rshby/go-event-ticketing/tracing"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
@@ -47,6 +49,9 @@ func server(cmd *cobra.Command, args []string) {
 		_ = redisClient.Close()
 	}()
 
+	// create cache manager
+	cacheManager := cacher.NewCacheManager(redisClient)
+
 	// connect to PostgreSql
 	db, err := database.ConnectPostgreSql()
 	if err != nil {
@@ -63,6 +68,9 @@ func server(cmd *cobra.Command, args []string) {
 
 	app := gin.Default()
 	gin.SetMode(gin.ReleaseMode)
+
+	// setup router
+	router.SetupRouter(&app.RouterGroup, db, cacheManager)
 
 	// create http server
 	httpServer := &http.Server{

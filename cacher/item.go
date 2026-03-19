@@ -9,13 +9,13 @@ type Item struct {
 
 type ItemOpt func(i *Item)
 
-func WithNoTTL() func(i *Item) {
+func WithNoTTL() ItemOpt {
 	return func(i *Item) {
 		i.ttl = -1
 	}
 }
 
-func WithCustomTTL(ttl time.Duration) func(i *Item) {
+func WithCustomTTL(ttl time.Duration) ItemOpt {
 	return func(i *Item) {
 		i.ttl = ttl
 	}
@@ -35,7 +35,10 @@ func NewItem(val any, opts ...ItemOpt) *Item {
 	return item
 }
 
-func (i *Item) WithNoTTL() {
+func (i *Item) WithNoTTL() ItemOpt {
+	return func(i *Item) {
+		i.ttl = -1
+	}
 }
 
 func (i *Item) Value() any {
@@ -44,8 +47,4 @@ func (i *Item) Value() any {
 
 func (i *Item) TTL() time.Duration {
 	return i.ttl
-}
-
-func (i *Item) IsNoTTL() bool {
-	return i.ttl == -1
 }
