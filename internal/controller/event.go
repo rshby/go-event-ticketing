@@ -100,3 +100,28 @@ func (e *EventController) GetEventByID(c *gin.Context) {
 		WithData(&events).
 		ToResponseAPI(c, http.StatusOK)
 }
+
+// DeleteEventByID deletes event by id
+func (e *EventController) DeleteEventByID(c *gin.Context) {
+	ctx, span := tracing.Start(c)
+	defer span.End()
+
+	logger := logrus.WithContext(ctx).WithFields(logrus.Fields{
+		"context": helper.DumpIncomingContext(ctx),
+	})
+
+	// get id from params
+	id := c.Param("id")
+
+	// call method in service
+	if err := e.eventService.DeleteEventByID(ctx, helper.ExpectedNumber[uint64](id)); err != nil {
+		logger.Error(err)
+		response.ResponseError(c, err)
+		return
+	}
+
+	// success delete
+	response.NewResponse().
+		WithMessage("success delete event").
+		ToResponseAPI(c, http.StatusOK)
+}

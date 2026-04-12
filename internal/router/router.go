@@ -25,6 +25,7 @@ func SetupRouter(app *gin.RouterGroup, db *gorm.DB, cache cacher.CacheManager) {
 			eventGroup.POST("", eventController.CreateEvent)
 			eventGroup.GET("", eventController.GetListEvents)
 			eventGroup.GET(":id", eventController.GetEventByID)
+			eventGroup.DELETE(":id", eventController.DeleteEventByID)
 		}
 	}
 }

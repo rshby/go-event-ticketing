@@ -12,8 +12,8 @@ import (
 
 type Number interface {
 	~int | ~int8 | ~int16 | ~int32 | ~int64 |
-	~uint | ~uint8 | ~uint16 | ~uint32 | ~uint64 | ~uintptr |
-	~float32 | ~float64
+		~uint | ~uint8 | ~uint16 | ~uint32 | ~uint64 | ~uintptr |
+		~float32 | ~float64
 }
 
 func Dump(v any) string {
@@ -95,10 +95,18 @@ func ExpectedNumber[T Number](input any) T {
 
 		return zero
 	case string:
-		parsed, err := strconv.ParseFloat(v, 64)
-		if err == nil {
-			return T(parsed)
+		if parsedInt, err := strconv.ParseInt(v, 10, 64); err == nil {
+			return T(parsedInt)
 		}
+
+		if parsedUint, err := strconv.ParseUint(v, 10, 64); err == nil {
+			return T(parsedUint)
+		}
+
+		if parsedFloat, err := strconv.ParseFloat(v, 64); err == nil {
+			return T(parsedFloat)
+		}
+
 		return zero
 	default:
 		return zero

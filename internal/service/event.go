@@ -117,3 +117,23 @@ func (e *eventService) GetEventByID(ctx context.Context, id uint64) (*entity.Get
 
 	return &response, nil
 }
+
+// DeleteEventByID deletes event by id
+func (e *eventService) DeleteEventByID(ctx context.Context, id uint64) error {
+	ctx, span := tracing.Start(ctx)
+	defer span.End()
+
+	logger := logrus.WithContext(ctx).WithFields(logrus.Fields{
+		"context": helper.DumpIncomingContext(ctx),
+		"id":      id,
+	})
+
+	// call method in repository
+	if err := e.eventRepository.DeleteByID(ctx, id); err != nil {
+		logger.Error(err)
+		return err
+	}
+
+	logger.Info("success delete event")
+	return nil
+}
