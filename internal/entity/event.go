@@ -31,12 +31,14 @@ type EventRepository interface {
 	Insert(ctx context.Context, input Event) error
 	GetByID(ctx context.Context, id uint64) (*Event, error)
 	GetListEvent(ctx context.Context) ([]Event, error)
+	DeleteByID(ctx context.Context, id uint64) error
 }
 
 type EventService interface {
 	CreateEvent(ctx context.Context, request CreateEventRequestDTO) error
 	GetListEvents(ctx context.Context) ([]GetListEventsResponseDTO, error)
 	GetEventByID(ctx context.Context, id uint64) (*GetEventByIDResponseDTO, error)
+	DeleteEventByID(ctx context.Context, id uint64) error
 }
 
 type CreateEventRequestDTO struct {

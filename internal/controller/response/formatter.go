@@ -31,7 +31,8 @@ func (r *ResponseDTO) ToResponseAPI(c *gin.Context, code int) {
 }
 
 var errResponse = map[error]*internalErrors.InternalError{
-	internalErrors.ErrBadRequest: internalErrors.NewInternalError().WithCode(http.StatusBadRequest).WithMessage(internalErrors.ErrBadRequest.Error()),
+	internalErrors.ErrBadRequest:    internalErrors.NewInternalError().WithCode(http.StatusBadRequest).WithMessage(internalErrors.ErrBadRequest.Error()),
+	internalErrors.ErrEventNotFound: internalErrors.NewInternalError().WithCode(http.StatusNotFound).WithMessage(internalErrors.ErrEventNotFound.Error()),
 }
 
 func ResponseError(c *gin.Context, err error) {

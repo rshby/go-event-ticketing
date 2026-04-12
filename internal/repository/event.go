@@ -128,3 +128,27 @@ func (e *eventRepository) GetListEvent(ctx context.Context) ([]entity.Event, err
 	logrus.Info("success retrieves list of events")
 	return events, nil
 }
+
+// DeleteByID deletes event by id
+func (e *eventRepository) DeleteByID(ctx context.Context, id uint64) error {
+	ctx, span := tracing.Start(ctx)
+	defer span.End()
+
+	logger := logrus.WithContext(ctx).WithFields(logrus.Fields{
+		"context": helper.DumpIncomingContext(ctx),
+		"id":      id,
+	})
+
+	// delete in database
+	if err := e.db.WithContext(ctx).Model(&entity.Event{}).Delete(&entity.Event{}, "id = ?", id).Error; err != nil {
+		logger.Error(err)
+		return err
+	}
+
+	cacheKey := cacher.GetEventByIDCacheKey(id)
+	if err := e.cache.Delete(ctx, cacheKey); err != nil {
+		logger.Error(err)
+	}
+
+	return nil
+}
