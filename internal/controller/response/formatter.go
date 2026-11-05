@@ -4,6 +4,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+
 	internalErrors "github.com/rshby/go-event-ticketing/internal/errors"
 )
 

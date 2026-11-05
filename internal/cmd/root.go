@@ -1,10 +1,11 @@
 package cmd
 
 import (
-	"github.com/rshby/go-event-ticketing/config"
-	"github.com/rshby/go-event-ticketing/internal/logger"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
+
+	"github.com/rshby/go-event-ticketing/config"
+	"github.com/rshby/go-event-ticketing/internal/logger"
 )
 
 var (

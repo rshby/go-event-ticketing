@@ -4,11 +4,12 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"github.com/sirupsen/logrus"
+
 	"github.com/rshby/go-event-ticketing/internal/controller/response"
 	"github.com/rshby/go-event-ticketing/internal/entity"
 	"github.com/rshby/go-event-ticketing/tracing"
 	"github.com/rshby/go-event-ticketing/utils/helper"
-	"github.com/sirupsen/logrus"
 )
 
 type EventController struct {

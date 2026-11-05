@@ -4,8 +4,9 @@ import (
 	"fmt"
 
 	"github.com/redis/go-redis/v9"
-	"github.com/rshby/go-event-ticketing/config"
 	"github.com/sirupsen/logrus"
+
+	"github.com/rshby/go-event-ticketing/config"
 )
 
 // ConnectRedis connects redis

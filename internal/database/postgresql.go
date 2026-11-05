@@ -3,12 +3,13 @@ package database
 import (
 	"fmt"
 
-	"github.com/rshby/go-event-ticketing/config"
 	"github.com/sirupsen/logrus"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
 	"gorm.io/plugin/opentelemetry/tracing"
+
+	"github.com/rshby/go-event-ticketing/config"
 )
 
 // ConnectPostgreSql connect to SQL
