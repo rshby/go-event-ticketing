@@ -1,0 +1,4 @@
+# Default owner for everything in the repo.
+# Code owners are requested for review automatically, and their approval
+# is required to merge into protected branches (see branch protection).
+* @rshby
