@@ -4,13 +4,14 @@ import (
 	"context"
 	"errors"
 
+	"github.com/sirupsen/logrus"
+	"gorm.io/gorm"
+
 	"github.com/rshby/go-event-ticketing/cacher"
 	"github.com/rshby/go-event-ticketing/config"
 	"github.com/rshby/go-event-ticketing/internal/entity"
 	"github.com/rshby/go-event-ticketing/tracing"
 	"github.com/rshby/go-event-ticketing/utils/helper"
-	"github.com/sirupsen/logrus"
-	"gorm.io/gorm"
 )
 
 type eventRepository struct {

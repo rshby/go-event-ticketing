@@ -2,12 +2,13 @@ package router
 
 import (
 	"github.com/gin-gonic/gin"
+	"gorm.io/gorm"
+
 	"github.com/rshby/go-event-ticketing/cacher"
 	"github.com/rshby/go-event-ticketing/internal/controller"
 	"github.com/rshby/go-event-ticketing/internal/middleware"
 	"github.com/rshby/go-event-ticketing/internal/repository"
 	"github.com/rshby/go-event-ticketing/internal/service"
-	"gorm.io/gorm"
 )
 
 // SetupRouter setups router

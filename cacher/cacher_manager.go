@@ -9,6 +9,7 @@ import (
 	"time"
 
 	"github.com/redis/go-redis/v9"
+
 	"github.com/rshby/go-event-ticketing/config"
 	"github.com/rshby/go-event-ticketing/tracing"
 )
@@ -76,7 +77,7 @@ func (c *cacheManager) Decompress(data []byte, dest any) error {
 func (c *cacheManager) Set(ctx context.Context, key string, value any, ttl time.Duration) error {
 	ctx, span := tracing.Start(ctx)
 	defer span.End()
-	
+
 	compressedData, err := c.Compress(value)
 	if err != nil {
 		return err

@@ -11,13 +11,14 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
+	"github.com/sirupsen/logrus"
+	"github.com/spf13/cobra"
+
 	"github.com/rshby/go-event-ticketing/cacher"
 	"github.com/rshby/go-event-ticketing/config"
 	"github.com/rshby/go-event-ticketing/internal/database"
 	"github.com/rshby/go-event-ticketing/internal/router"
 	"github.com/rshby/go-event-ticketing/tracing"
-	"github.com/sirupsen/logrus"
-	"github.com/spf13/cobra"
 )
 
 var (

@@ -5,9 +5,10 @@ import (
 	"runtime"
 
 	"github.com/gin-gonic/gin"
-	"github.com/rshby/go-event-ticketing/config"
 	"go.opentelemetry.io/otel"
 	"go.opentelemetry.io/otel/trace"
+
+	"github.com/rshby/go-event-ticketing/config"
 )
 
 // Start starts a span

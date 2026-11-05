@@ -1,10 +1,11 @@
 package cmd
 
 import (
-	"github.com/rshby/go-event-ticketing/internal/database"
 	migrate "github.com/rubenv/sql-migrate"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
+
+	"github.com/rshby/go-event-ticketing/internal/database"
 )
 
 var (

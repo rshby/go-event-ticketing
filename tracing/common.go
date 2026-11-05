@@ -4,7 +4,6 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/rshby/go-event-ticketing/config"
 	"github.com/sirupsen/logrus"
 	"go.opentelemetry.io/otel"
 	"go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracegrpc"
@@ -12,6 +11,8 @@ import (
 	"go.opentelemetry.io/otel/sdk/resource"
 	"go.opentelemetry.io/otel/sdk/trace"
 	semconv "go.opentelemetry.io/otel/semconv/v1.39.0"
+
+	"github.com/rshby/go-event-ticketing/config"
 )
 
 // ConnectOTLPTrace connects to otlp trace
